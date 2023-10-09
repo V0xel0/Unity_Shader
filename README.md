@@ -12,16 +12,16 @@ Ocean shader is based on few gerstner waves.
 ### Water
 
 
-https://github.com/V0xel0/Unity_Shader/assets/45827365/ec8bd4d5-38f3-4058-8bdc-3ff45d237cf8
+https://github.com/V0xel0/Unity_Shader/assets/45827365/d27fdedd-1c7a-4fb4-ba6a-8af116acad9a
 
 
 UI Controls  
 
-![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/ade03fef-ba87-4ed1-bfdd-431e5f9de1d3)
+![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/594a03c0-7a22-418a-8da5-dd802d0a678f)
 
 ### Waves
 
-https://github.com/V0xel0/Unity_Shader/assets/45827365/b86708b7-f785-4fb2-b3e0-8641aa385334
+https://github.com/V0xel0/Unity_Shader/assets/45827365/805b0f0d-4fef-468a-9f6a-9b850ec563dc
 
 ## Smoother
 Shader + script that allows creations of semi-interactive mud, snow, skidmarks etc. Works by writing to red-channel of intermediate texture, raycasting and converting the hit to UV space and then using that data to move vertices, alter normal map and albedo.
@@ -30,39 +30,40 @@ Vertex movement can be disabled if our platform is computation starved.
 
 ### Typical behaviour
 
-https://github.com/V0xel0/Unity_Shader/assets/45827365/76662879-620d-44df-97a4-7a558c095bd6
+https://github.com/V0xel0/Unity_Shader/assets/45827365/4e6b13b2-53a0-4efd-888f-538208cf2bc1
 
 ### Regeneration effect
 
-https://github.com/V0xel0/Unity_Shader/assets/45827365/c18f98b6-d255-491e-8ee1-c62b82af80f7
+https://github.com/V0xel0/Unity_Shader/assets/45827365/8c031357-6b81-4865-9e7b-6f3b860fd61f
 
 ## Painter
 Allows automatic smooth applying of second texture based on direction vector and normal vectors of the mesh. Useful for dirt, snow etc.
 ### Typical Usage
 
-https://github.com/V0xel0/Unity_Shader/assets/45827365/4edc0cda-4a4c-44bc-9f7f-dc506aa0bb39
+https://github.com/V0xel0/Unity_Shader/assets/45827365/cc99ae18-d6a8-4a1b-ad36-75bcb679efe5
 
 ### Changing direction
 
-https://github.com/V0xel0/Unity_Shader/assets/45827365/16404356-4f23-4127-89d8-116f3b3412fe
+https://github.com/V0xel0/Unity_Shader/assets/45827365/aa78b6e5-a12a-4faf-9165-51e51fca9121
 
 ## Outglow
 Applying inner or outer glow to a mesh, useful for fast fake lights, special effects, marking/selecting objects by hilighting them.
 
-https://github.com/V0xel0/Unity_Shader/assets/45827365/8ac87709-1ee2-42af-8f7b-066f4307b39f
+https://github.com/V0xel0/Unity_Shader/assets/45827365/873ea6f9-1086-4f44-9a32-f87820954b82
 
 ## Fake PBR
 This was created to approximate unity standard PBR shader but taking some shortcuts in terms of being PBR "correct" in order to gain on efficiency on really old, mobile platforms. It allows easy extenbility to more lights and customization.    
-![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/2c1d5078-e0be-4a2c-b8d3-28f6f75d4811)
+![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/af75e45e-f28a-4e9b-ab4e-58d42a814146)
+On the left Unity standard on the right the Fake one
+![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/7a5c6565-261f-4c15-a4f8-5b1dd234ae02)
 On the right Unity standard on the left the Fake one
-![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/7be799cf-d65f-4bdc-a19a-86eb2478cd08)
-On the right Unity standard on the left the Fake one
-![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/aefa4515-da50-47c3-bbe6-df830f933787)
+![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/fadb962a-a119-40f1-925c-68ac11f8282d)
 Support of standard PBR game meshes (normal, albedo, metallic, roughness maps)
-![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/976cb79e-c844-4a52-904b-151a75ba78c1)
+![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/701b17ff-21f8-4869-88c1-00fba3f34824)
 
 ## Toon
 Typical toon shader with outline rendered by pushing backfaces, allows adding additonal rims and steps for achieving different effects.
 
-![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/58f93403-9744-43e4-aecb-bbf557f591af)
+![image](https://github.com/V0xel0/Unity_Shader/assets/45827365/69bca90e-5554-4eb6-bb09-d80f598ce3d9)
+
 
