@@ -32,9 +32,7 @@
             #pragma shader_feature _METALLIC_MAP
             #pragma shader_feature _SMOOTHNESS_ALBEDO
 
-
             #include "UnityCG.cginc"
-            #include "AutoLight.cginc"
             #include "Lighting.cginc"
             #include "UnityStandardBRDF.cginc"
             #include "Assets/Includes/CGINCS/CustomUtils.cginc"
@@ -49,12 +47,12 @@
 
             struct v2f
             {
+                half4  vertex    : SV_POSITION ;
                 float2 uv        : TEXCOORD0   ;
-                half3  normal    : TEXCOORD2   ;
-                half3  viewDir   : TEXCOORD3   ;
-                half4  tangent   : TEXCOORD4   ;
-                half3  biTangent : TEXCOORD5   ;
-                half4 pos : SV_POSITION;
+                half3  normal    : TEXCOORD1   ;
+                half3  viewDir   : TEXCOORD2   ;
+                half4  tangent   : TEXCOORD3   ;
+                half3  biTangent : TEXCOORD4   ;
             };
 
             sampler2D _MainTex     ;
@@ -71,13 +69,12 @@
             v2f vert (appdata v)
             {
                 v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.vertex = UnityObjectToClipPos(v.vertex);
                 o.normal = UnityObjectToWorldNormal(v.normal);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.tangent = float4(UnityObjectToWorldDir(v.tangent.xyz), v.tangent.w);
                 o.biTangent = CalcBiNormal(o.normal, o.tangent);
                 o.viewDir = normalize (WorldSpaceViewDir(v.vertex));
-                
                 return o;
             }
 
@@ -135,21 +132,28 @@
                 blinPhong *= lerp(0, 9, smoothness ) * smoothness;
                 
                 half3 specMix = blinPhong * specColor;
-                half3 diffuse = albedo * (NoL * _LightColor0 + ambient);
+                half3 baseLightning = NoL * _LightColor0 + ambient;
 
                 // 0.17 Diamond (linear) is 0.45 in SRGB, for performance reason Gamma workflow is assumed
-                //But remeber proper PBR requires all inputs to be linear!
+                //But PBR requires all inputs to be linear xDDD
                 half normBase = lerp(0, 0.45, _BaseRef); 
                 half fresnelPow = Pow4(1 - NoV);
                 half3 r0 = lerp(normBase, specColor, metallic); //spec Color is in srgb TODO:: Replace Unity macro to own if want linear
                 r0 = clamp(r0, 0.01, 0.95);
                 half3 f0 = (r0 + (1 - r0) * fresnelPow);
-    
-                half3 fakeEnvironment = f0 * envSample * clamp(smoothness, 0.84, 1);
+
+                // albedo = GetDiffuseColorAndSmoothness(i.uv.xy, smoothness);
+                // half3 kD = 1 - f0;
+                // kD *= oneMinusReflectivity;
 
                 //Final color
                 fixed4 col;
-                col.rgb = (diffuse + fakeEnvironment + specMix) ;
+                col.rgb =  (albedo * baseLightning + 
+                          f0 * envSample  * clamp(smoothness, 0.84, 1) + //hack
+                          + specMix ) + 
+                          NoL * specColor * (1 - smoothness) * clamp(metallic, 0, 0.75); //hack for metallic witl low smooth
+                // col.rgb = col.rgb / (col.rgb + 1);
+                // col.rgb = pow(col.rgb, half3(1/2.2, 1/2.2, 1/2.2));
                 col.a = 1.0;
                 return col;
             }
