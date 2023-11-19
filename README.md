@@ -1,5 +1,5 @@
 # Unity_Shaders
- Shaders that I previously worked on and can share their source code. (No assets, only code)
+ Shaders that I worked on. (No assets, only code)
  
 - [Water & Waves](#water-&-waves)
 - [Smoother](#smoother)
